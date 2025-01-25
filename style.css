@@ -66,3 +66,33 @@
 }
 
 /**** VIDEOS ****/
+.videos_section {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffe46a;
+}
+
+.video_title {
+    font-size: clamp(4rem, 8vw, 9rem); /* Responsive scaling */
+    text-transform: uppercase;
+    line-height: 0.8;
+    color: white;
+}
+
+.video_contents {
+    line-height: 2;
+    font-size: clamp(1.5rem, 4vw, 1.5rem); /* Responsive scaling */
+}
+
+.video_container {
+    height: 80vh;
+    padding: 10%;
+    display: flex;
+    padding: 5%;
+    justify-content: center;
+    align-items: center;
+}
+
+.videos_list {
+    list-style: none;
+}

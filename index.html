@@ -31,10 +31,70 @@
             </div>
           </div>   
 
-        <div class="intro">
-            <!-- <iframe src="https://drive.google.com/file/d/18NuGBG0Hr_1rtWnEeD17xjvzfd1BVEGj/preview" width="80%" height="auto" allow="autoplay"></iframe> -->
-            <!-- style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" -->
+        <div class="videos_section">
+          <div class="container">
+            <div id="video_title" class="video_title poppins_bold">INTRO</div>
+            <div class="row">
+              <div class="col-md video_container">
+                <div class="video_display">
+                  <iframe 
+                    id="video" 
+                    class="default_video" 
+                    src="https://drive.google.com/file/d/18NuGBG0Hr_1rtWnEeD17xjvzfd1BVEGj/preview" 
+                    width="560" 
+                    height="315" 
+                    frameborder="0" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+              <div class="col-md video_contents poppins_bold">
+                <ul class="videos_list">
+                  <li onclick="updateVideo('INTRO', 'video1')">1-INTRO (4:06)</li>
+                  <li onclick="updateVideo('WELCOME PRAYER', 'video2')">2-WELCOME PRAYER (5:52)</li>
+                  <li onclick="updateVideo('LUNCH', 'video3')">3-LUNCH (2:28)</li>
+                  <li onclick="updateVideo('AFTER LUNCH', 'video4')">4-AFTER LUNCH (6:13)</li>
+                  <li onclick="updateVideo('DANCE CONTEST', 'video5')">5-DANCE CONTEST (9:20)</li>
+                  <li onclick="updateVideo('KURATSA', 'video6')">6-KURATSA (2:35)</li>
+                  <li onclick="updateVideo('TRIVIA', 'video7')">7-TRIVIA (8:28)</li>
+                  <li onclick="updateVideo('DANCING', 'video8')">8-DANCING (10:10)</li>
+                  <li onclick="updateVideo('RAFFLE', 'video9')">9-RAFFLE (3:25)</li>
+                  <li onclick="updateVideo('MUSICAL CHAIRS', 'video10')">10-MUSICAL CHAIRS (5:06)</li>
+                  <li onclick="updateVideo('DANCING', 'video11')">11-DANCING (6:21)</li>
+                  <li onclick="updateVideo('END', 'video12')">12-END (4:42)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <script src="" async defer></script>
+        <script>
+          function updateVideo(title, videoClass) {
+            // Update the title
+            const videoTitle = document.getElementById('video_title');
+            videoTitle.textContent = title;
+          
+            // Update the iframe class and src
+            const iframe = document.getElementById('video');
+            iframe.className = videoClass;
+          
+            // Set the appropriate src for the video
+            const videoMap = {
+              video1: "https://drive.google.com/file/d/18NuGBG0Hr_1rtWnEeD17xjvzfd1BVEGj/preview",
+              video2: "https://drive.google.com/file/d/1MS23ZAdcOxiBHZFEUicigWKBI0Q1nzk9/preview",
+              video3: "https://drive.google.com/file/d/1kqv-tAKlU9ksq0_u3A7an-OCBJyUBzeE/preview",
+              video4: "https://drive.google.com/file/d/1v4qSw6HJ544wYMCRmkGGyQoXBLMjGL30/preview",
+              video5: "https://drive.google.com/file/d/1LfWcRPbBNmbJpTuIHxhyWM9URQpE9Zzt/preview",
+              video6: "https://drive.google.com/file/d/17vqkj3ZBivRdeCKO16x7jaXx69TXBDyo/preview",
+              video7: "https://drive.google.com/file/d/1d7XLAMc5xT9E4VWMiTFnJlFQ2rLElQmq/preview",
+              video8: "https://drive.google.com/file/d/1jf35kCOWs_lReoQyALJ-LwU5KkGRKyxy/preview",
+              video9: "https://drive.google.com/file/d/19VVjOS3Y6rkh_JNfaIdaTlVFaodTIpNf/preview",
+              video10: "https://drive.google.com/file/d/1LZhgomfMwzt56Q-epadUkNIsCz1Js4-Y/preview",
+              video11: "https://drive.google.com/file/d/18F5uGlTCtWAeWzBEo0A3Pwz9o0wCKPh7/preview",
+              video12: "",
+            };
+          
+            iframe.src = videoMap[videoClass] || iframe.src; // Fallback to current src if class is not in the map
+          }
+        </script>
     </body>
 </html>
