@@ -19,11 +19,21 @@
     font-family: "Poppins", serif;
     font-weight: 900;
   }
+
 /**** HOME ****/
 .home {
     width: 100%;
     height: 100vh;
-    overflow: hidden;
+    background-color: #ffe46a;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.home_logo_container {
+    display: flex;
+    justify-content: end;
+    align-self: flex-end;
 }
 
 .home_description {
@@ -33,27 +43,26 @@
     padding: 5% 10%;
 }
 
+
 .home_bato {
-    font-size: 5rem;
+    font-size: clamp(4rem, 8vw, 9rem); /* Responsive scaling */
     text-transform: uppercase;
     line-height: 0.8;
     color: white;
 }
 
 .home_class {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 5vw, 5rem); /* Responsive scaling */
     text-transform: uppercase;
     line-height: 0.8;
     color: white;
 }
 
-.home_reunion_logo {
-    width: 100%;
-}
-
 .home_year {
     color: #9f2b00;
 }
-.home_bato_photo {
-
+.home_reunion_logo {
+    width: 22vw;
 }
+
+/**** VIDEOS ****/
