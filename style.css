@@ -1,6 +1,7 @@
 
 html, body {
-    background-color: #ffe46a;;
+    background-color: #ffe46a;
+    overflow-x: hidden;
 }
 
 /**** FONT ****/
