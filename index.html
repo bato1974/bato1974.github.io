@@ -68,13 +68,25 @@
           </div>
         </div>
 
+        <div class="counter"></div>
         <div class="photo_section">
           <div class="container">
             <div class="gallery_title poppins_bold">PHOTO GALLERY</div>
             <div class="gallery" id="gallery"></div>
           </div>
-          
         </div>
+      
+        <div id="modal" class="modal">
+          <iframe 
+           id="modal-img"
+            src="" 
+            width="640"
+             height="480" 
+             allow="autoplay">
+          </iframe>
+          <!-- <img id="modal-img" src="" alt=""> -->
+        </div>
+
         <script>
           function updateVideo(title, videoClass) {
             // Update the title
@@ -108,24 +120,67 @@
         <script>
           const folderId = '1aHAV08uUSe-0ihiayp9TdBd1J0y6Z1LC'; // Replace with your Google Drive folder ID
           const apiKey = 'AIzaSyCEJeYmm4jTGCtFAsSfgq7xO0hrWFpT-KQ'; // Replace with your Google API key
-      
-          async function fetchImages() {
-            const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}&fields=files(id,name,mimeType)`;
-            const response = await fetch(url);
-            const data = await response.json();
-      
+        
+          async function fetchAllImages() {
             const gallery = document.getElementById('gallery');
-            data.files.forEach(file => {
-              if (file.mimeType.startsWith('image/')) {
-                const img = document.createElement('img');
-                img.src = `https://drive.google.com/uc?id=${file.id}`;
-                img.alt = file.name;
-                gallery.appendChild(img);
-              }
-            });
+            let pageToken = null; // Used for pagination
+        
+            do {
+              // Build the API URL
+              const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}&fields=nextPageToken,files(id,name,mimeType)&pageToken=${pageToken || ''}`;
+              const response = await fetch(url);
+              const data = await response.json();
+        
+              // Loop through each file and add it to the gallery
+              data.files.forEach(file => {
+                if (file.mimeType.startsWith('image/')) {
+                  const thumbnailUrl = `https://drive.google.com/thumbnail?id=${file.id}`;
+                  const fullImageUrl = `https://drive.google.com/file/d/${file.id}/preview`; 
+
+                  // Create a thumbnail element
+                  const img = document.createElement('img');
+                  img.src = thumbnailUrl;
+                  img.alt = file.name;
+                  img.dataset.fullImage = fullImageUrl; // Store full-size image URL
+                  img.addEventListener('click', showImageInModal); // Add click event
+        
+                  gallery.appendChild(img);
+                }
+              });
+        
+              // Get the next page token
+              pageToken = data.nextPageToken;
+            } while (pageToken); // Continue fetching while there's a next page
+        
+            // Update the counter after all images are added
+            updateImageCounter();
           }
-      
-          fetchImages();
+        
+          // Function to update the image counter
+          function updateImageCounter() {
+            const counterDiv = document.querySelector('.counter');
+            const imageCount = document.querySelectorAll('#gallery img').length; // Count images in the gallery div
+            counterDiv.textContent = `Total Images: ${imageCount}`;
+          }
+        
+          // Function to show the clicked image in the modal
+          function showImageInModal(event) {
+            const fullImageUrl = event.target.dataset.fullImage;
+        
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+        
+            modalImg.src = fullImageUrl; // Set modal image source
+            modal.style.display = 'flex'; // Show modal
+          }
+        
+          // Close modal on click
+          document.getElementById('modal').addEventListener('click', () => {
+            document.getElementById('modal').style.display = 'none';
+          });
+        
+          // Fetch all images on page load
+          fetchAllImages();
         </script>
     </body>
 </html>
